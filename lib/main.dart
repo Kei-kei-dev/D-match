@@ -1,21 +1,64 @@
+import 'package:d_match/pages/chat_list.dart';
+import 'package:d_match/pages/profile_page.dart';
 import 'package:d_match/pages/top_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  runApp(const MyApp());
+  const app = MaterialApp(home: Root());
+
+  const scope = ProviderScope(child: app);
+  runApp(scope);
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+final indexProvider = StateProvider(
+  (ref) {
+    return 0;
+  },
+);
+
+class Root extends ConsumerWidget {
+  const Root({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+  Widget build(BuildContext context, WidgetRef ref) {
+    final index = ref.watch(indexProvider);
+
+    const items = [
+      BottomNavigationBarItem(
+        icon: Icon(Icons.home),
+        label: 'ホーム',
       ),
-      home: const TopPage(),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.chat),
+        label: 'トーク',
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.person),
+        label: 'プロフィール',
+      ),
+    ];
+
+    final bar = BottomNavigationBar(
+      items: items,
+      backgroundColor: Colors.purple,
+      selectedItemColor: Colors.white,
+      unselectedItemColor: Colors.white70,
+      currentIndex: index,
+      onTap: (index) {
+        ref.read(indexProvider.notifier).state = index;
+      },
+    );
+
+    final pages = [
+      const TopPage(),
+      const ChatList(),
+      const ProfilePage(),
+    ];
+
+    return Scaffold(
+      body: pages[index],
+      bottomNavigationBar: bar,
     );
   }
 }
