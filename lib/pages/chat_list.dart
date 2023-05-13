@@ -10,6 +10,11 @@ class ChatList extends StatefulWidget {
 class _ChatListState extends State<ChatList> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('チャットアプリ'),
+      ),
+      body: const Center(child: Text('チャット画面です')),
+    );
   }
 }
