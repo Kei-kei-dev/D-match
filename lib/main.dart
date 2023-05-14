@@ -3,8 +3,16 @@ import 'package:d_match/pages/profile_page.dart';
 import 'package:d_match/pages/top_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  // firebase連携
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   const app = MaterialApp(home: Root());
 
   const scope = ProviderScope(child: app);
