@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:d_match/firestore/room_firestore.dart';
 import 'package:d_match/model/talk_room.dart';
-import 'package:d_match/model/user.dart';
 import 'package:d_match/pages/talk_room_page.dart';
 import 'package:flutter/material.dart';
 
@@ -13,16 +12,6 @@ class ChatList extends StatefulWidget {
 }
 
 class _ChatListState extends State<ChatList> {
-  List<User> userList = [
-    User(
-      name: '田中',
-      uid: 'abc',
-      imagePath:
-          'https://thumb.photo-ac.com/05/05b73f7797034e6adf179f8727f718cc_t.jpeg',
-    ),
-    User(name: '佐藤', uid: 'def'),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,8 +39,8 @@ class _ChatListState extends State<ChatList> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => TalkRoomPage(
-                                              talkRooms[index].talkUser.name)));
+                                          builder: (context) =>
+                                              TalkRoomPage(talkRooms[index])));
                                 },
                                 child: SizedBox(
                                   height: 70,
