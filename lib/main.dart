@@ -1,6 +1,8 @@
+import 'package:d_match/firestore/user_firestore.dart';
 import 'package:d_match/pages/chat_list.dart';
 import 'package:d_match/pages/profile_page.dart';
 import 'package:d_match/pages/top_page.dart';
+import 'package:d_match/utils/shared_prefs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -12,6 +14,10 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  await SharedPrefs.setPrefsInstance();
+  String? uid = SharedPrefs.fetchUid();
+  if (uid == null) await UserFirestore.createUser();
 
   const app = MaterialApp(home: Root());
 
