@@ -16,7 +16,8 @@ class _ChatListState extends State<ChatList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('チャットアプリ'),
+        title: const Text('トーク画面'),
+        backgroundColor: Colors.purple,
       ),
       body: StreamBuilder<QuerySnapshot>(
           stream: RoomFirestore.joinedRoomSnapshot,
